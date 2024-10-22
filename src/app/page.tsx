@@ -15,11 +15,14 @@ export default function Home() {
       <Button variant="ghost">
         Ghost
       </Button>
-      <Button variant="link">
-        Link
+      <Button variant="muted">
+        Muted
       </Button>
       <Button variant="outline">
         Outline
+      </Button>
+      <Button variant="teritary">
+      teritary
       </Button>
     </div>
   );
