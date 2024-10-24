@@ -11,20 +11,24 @@ import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { loginSchema } from "../schemas";
+import { useLogin } from "../api/used-login";
 
-const formSchema = z.object({
-  email: z.string().trim().email(),
-  password: z.string().min(8, "Minimum 8 characters required").max(32, "Maximum 32 characters allowed"),
-});
+// const formSchema = z.object({
+//   email: z.string().trim().email(),
+//   password: z.string().min(8, "Minimum 8 characters required").max(32, "Maximum 32 characters allowed"),
+// });
 
 export const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useLogin();
+
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values})
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    mutate(values);
   };
 
   return (
