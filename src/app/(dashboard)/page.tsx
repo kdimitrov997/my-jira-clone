@@ -1,8 +1,14 @@
 import { redirect } from "next/navigation";
 
 import { getCurrent } from "@/features/auth/actions";
-import { UserButton } from "@/features/auth/components/user-button";
 
+/**
+ * The dashboard page.
+ *
+ * If the user is not logged in, redirect them to the login page.
+ *
+ * @returns The dashboard page.
+ */
 export default async function Home() {
   const user = await getCurrent();
 
@@ -10,7 +16,7 @@ export default async function Home() {
 
   return (
     <div className="">
-      <UserButton />
+      This is a home page
     </div>
   );
 }
