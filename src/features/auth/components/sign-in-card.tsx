@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 
 import { FcGoogle } from "react-icons/fc";
@@ -8,23 +10,20 @@ import Link from "next/link";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/use-login";
 
-// const formSchema = z.object({
-//   email: z.string().trim().email(),
-//   password: z.string().min(8, "Minimum 8 characters required").max(32, "Maximum 32 characters allowed"),
-// });
-
 export const SignInCard = () => {
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { 
+      email: "", 
+      password: "" },
   });
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
@@ -34,7 +33,7 @@ export const SignInCard = () => {
   };
 
   return (
-    <div className="w-full h-full md:w-[487px] border-none shadow-none">
+    <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">
           Welcome back!
@@ -78,7 +77,7 @@ export const SignInCard = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={false} size="lg" className="w-full">
+            <Button disabled={isPending} size="lg" className="w-full">
               Log In
             </Button>
           </form>
@@ -92,7 +91,7 @@ export const SignInCard = () => {
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
+          disabled={isPending}
         >
           <FcGoogle className="mr-2 size-5"/>
           Login with Google
@@ -101,7 +100,7 @@ export const SignInCard = () => {
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
+          disabled={isPending}
         >
           <FaGithub className="mr-2 size-5"/>
           Login with GitHub
@@ -118,6 +117,6 @@ export const SignInCard = () => {
           </Link>
         </p>
       </CardContent>
-    </div>
+    </Card>
   );
 };

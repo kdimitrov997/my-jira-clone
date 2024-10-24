@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -7,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
-import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { registerSchema } from "../schemas";
@@ -15,7 +17,7 @@ import { useRegister } from "../api/use-register";
 
 
 export const SignUpCard = () => {
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -30,7 +32,7 @@ export const SignUpCard = () => {
   };
 
   return (
-    <div className="w-full h-full md:w-[487px] border-none shadow-none">
+    <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">
           Sign Up
@@ -100,8 +102,8 @@ export const SignUpCard = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={false} size="lg" className="w-full">
-              Log In
+            <Button disabled={isPending} size="lg" className="w-full">
+              Register
             </Button>
           </form>
         </Form>
@@ -114,7 +116,7 @@ export const SignUpCard = () => {
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
+          disabled={isPending}
         >
           <FcGoogle className="mr-2 size-5"/>
           Login with Google
@@ -123,7 +125,7 @@ export const SignUpCard = () => {
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
+          disabled={isPending}
         >
           <FaGithub className="mr-2 size-5"/>
           Login with GitHub
@@ -140,6 +142,6 @@ export const SignUpCard = () => {
           </Link>
         </p>
       </CardContent>
-    </div>
+    </Card>
   );
 };
