@@ -13,7 +13,7 @@ export const useLogin = () => {
     RequestType
   >({
     mutationFn: async ({ json }) => {
-      const response = await client.api.auth.login.$post({ json });
+      const response = await client.api.auth.login["$post"]({ json });
       return await response.json();
     },
   });

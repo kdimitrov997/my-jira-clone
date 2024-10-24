@@ -13,7 +13,7 @@ export const useRegister = () => {
     RequestType
   >({
     mutationFn: async ({ json }) => {
-      const response = await client.api.auth.register.$post({ json });
+      const response = await client.api.auth.register["$post"]({ json });
       return await response.json();
     },
   });
