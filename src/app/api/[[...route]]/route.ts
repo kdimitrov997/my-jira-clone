@@ -4,19 +4,13 @@ import auth from "@/features/auth/server/route";
 
 const app = new Hono().basePath("/api");
 
-// app.get("/hello", (c) => {
-//   return c.json({ hello: "Hello, World!" });
-// });
-
-// app.get("/project/:projectId", (c) => {
-//   const { projectId } = c.req.param();
-
-//   return c.json({ project: projectId });
-// });
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes = app
   .route("/auth", auth);
 
-export const Get = handle(app);
+export const GET = handle(app);
+export const POST = handle(app);
+export const PATCH = handle(app);
+export const DELETE = handle(app);
 
 export type AppType = typeof routes;

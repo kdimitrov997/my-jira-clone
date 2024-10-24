@@ -12,7 +12,7 @@ import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { loginSchema } from "../schemas";
-import { useLogin } from "../api/used-login";
+import { useLogin } from "../api/use-login";
 
 // const formSchema = z.object({
 //   email: z.string().trim().email(),
@@ -28,7 +28,9 @@ export const SignInCard = () => {
   });
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    mutate(values);
+    mutate({
+      json: values
+    });
   };
 
   return (
