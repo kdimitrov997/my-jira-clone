@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { getCurrent } from "@/features/auth/actions";
+import { CreateWorkspaceForm } from "@/features/workspaces/components/create-workspace-form";
 
 /**
  * The dashboard page.
@@ -15,8 +16,8 @@ export default async function Home() {
   if (!user) redirect("/sign-in"); // check if you need to delete this redirect later on
 
   return (
-    <div className="">
-      This is a home page
+    <div className="bg-neutral-500 p-4 h-full">
+      <CreateWorkspaceForm />
     </div>
   );
 }
