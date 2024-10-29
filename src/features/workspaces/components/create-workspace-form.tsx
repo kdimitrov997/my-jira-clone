@@ -16,12 +16,14 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 import { createWorkspaceSchema } from "../schemas";
 import { useCreateWorkspace } from "../api/use-create-workspace";
+import { useRouter } from "next/navigation";
 
 interface CreateWorkspaceFormProps {
   onCancel?: () => void;
 };
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
+  const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,9 +41,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
       image: values.image instanceof File ? values.image : "",
     };
     mutate({ form: finalValues }, {
-      onSuccess: () => {
+      onSuccess: ({ data }) => {
         form.reset();
-        // redirect to workspace
+        router.push(`/workspaces/${data.$id}`);
       },
     });
   }
