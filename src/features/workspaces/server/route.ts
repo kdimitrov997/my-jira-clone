@@ -80,7 +80,7 @@ const app = new Hono()
         { 
           name,
           userId: user.$id,
-          uploadedImageUrl: uploadedImageUrl,
+          imageUrl: uploadedImageUrl,
           inviteCode: generateInviteCode(10),
         },
       );
