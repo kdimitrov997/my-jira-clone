@@ -8,6 +8,7 @@ import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { cn } from "@/lib/utils";
 import { useCreateProjectModal } from "@/features/projects/hooks/use-create-project-workspace-modal";
+import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
 export const Projects = () => {
   const projectId = null;
@@ -39,6 +40,8 @@ export const Projects = () => {
                 isActive && "bg-white shadow-sm hover:opacity-100 text-primary"
               )}
             >
+              <ProjectAvatar image={project.imageUrl} name={project.name} /> 
+              {/* in image imageUrl is not recognized */}
               <span className="truncate">{project.name}</span>
             </div>
           </Link>
