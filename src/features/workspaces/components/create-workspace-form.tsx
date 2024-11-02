@@ -55,7 +55,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     if (file) {
       form.setValue("image", file);
     }
-  }
+  };
 
   return (
     <Card className="w-full h-full border-none shadow-none">
@@ -97,14 +97,14 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                         {field.value ? (
                           <div className="size-[72px] relative rounded-md overflow-hidden">
                             <Image 
+                              alt="Logo"
+                              fill
+                              className="object-cover"
                               src={
                                 field.value instanceof File 
                                 ? URL.createObjectURL(field.value)
                                 : field.value
                               }
-                              alt="Logo"
-                              fill
-                              className="object-cover"
                             />
                           </div>
                           ) : (
@@ -124,7 +124,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                             <input
                               className="hidden"
                               type="file"
-                              accept=".jpg,.jpeg,.png,.svg"
+                              accept=".jpg, .jpeg, .png, .svg"
                               ref={inputRef}
                               onChange={handleImageChange}
                               disabled={isPending}
